@@ -1,0 +1,44 @@
+mysql> CREATE DATABASE college;
+Query OK, 1 row affected (0.04 sec)
+
+mysql> USE college;
+Database changed
+mysql> CREATE TABLE department( dept_id INT PRIMARY KEY, dept_name VARCHAR(20) UNIQUE);
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> CREATE TABLE student(Sno INT PRIMARY KEY,
+    -> sname VARCHAR(20) NOT NULL,
+    -> email VARCHAR(30) UNIQUE,
+    -> age INT CHECK(age>=18),
+    -> city VARCHAR(20) DEFAULT 'chennai',
+    -> dept_id INT,
+    -> FOREIGN KEY(dept_id)REFERENCES department(dept_id)
+    -> );
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> INSERT INTO department VALUES(1,'AI&DS'),(2,'CSE');
+Query OK, 2 rows affected (0.04 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO student VALUES(101,'sri','sri@gmail.com',20,'chennai',1),
+    -> (102,'Anu','anu@gmail.com',19,'madurai',2);
+Query OK, 2 rows affected (0.03 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> CREATE INDEX idx_name ON Student(sname);
+Query OK, 0 rows affected (0.14 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select*from student;
++-----+-------+---------------+------+---------+---------+
+| sno | sname | email         | age  | city    | dept_id |
++-----+-------+---------------+------+---------+---------+
+| 101 | sri   | sri@gmail.com |   20 | chennai |       1 |
+| 102 | Anu   | anu@gmail.com |   19 | madurai |       2 |
++-----+-------+---------------+------+---------+---------+
+2 rows in set (0.00 sec)
+
+mysql>
+
+
+
